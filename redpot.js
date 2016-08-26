@@ -145,3 +145,10 @@ modal.find('.modal-confirm-action').attr('href', target);
 
 //Activate truncation of paragraphs
 $('.truncate').jTruncate();
+
+// Load custom ckeditor configs
+$('.ckeditor-custom').each(function() {
+	CKEDITOR.replace($(this).attr('id'), {
+		customConfig: '/inc/js/redpot/ckeditor_config/' + $(this).data('ckeditor-config') + '.js'
+	});
+});
