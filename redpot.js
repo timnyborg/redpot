@@ -152,3 +152,21 @@ $('.ckeditor-custom').each(function() {
 		customConfig: '/inc/js/redpot/ckeditor_config/' + $(this).data('ckeditor-config') + '.js'
 	});
 });
+
+// A bottom right 'characters remaining' counter for textareas.  Give the textarea class=lengthcounter and data-max-length 255 or whatever
+$(function() {
+    $('.length-counter').after(function () {
+        // Add the counter object
+        return '<span class="length-counter-affix help-block pull-right"></span>';
+    }).on('update_counter', function() {
+        // Update counter object
+        var text_remaining = $(this).data('max-length') - $(this).val().length;
+        $(this).next('.length-counter-affix').html(text_remaining + ' remaining');
+    }).keyup(function() {
+        // Wire it up to keypresses
+        $(this).trigger('update_counter');
+    }).each(function() {
+        // And initialize
+        $(this).trigger('update_counter');
+    });
+});
